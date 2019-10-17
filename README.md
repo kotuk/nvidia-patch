@@ -35,6 +35,8 @@ Requirements:
   - [430.40](https://international.download.nvidia.com/XFree86/Linux-x86_64/430.40/NVIDIA-Linux-x86_64-430.40.run)
   - [435.17](https://international.download.nvidia.com/XFree86/Linux-x86_64/435.17/NVIDIA-Linux-x86_64-435.17.run)
   - [435.21](https://international.download.nvidia.com/XFree86/Linux-x86_64/435.21/NVIDIA-Linux-x86_64-435.21.run)
+  - [440.26](https://international.download.nvidia.com/XFree86/Linux-x86_64/440.26/NVIDIA-Linux-x86_64-440.26.run)
+
 
 
 Tested on Ubuntu 18.04 LTS (GNU/Linux 4.15.0-23-generic x86\_64)
@@ -45,32 +47,37 @@ Tested on Ubuntu 18.04 LTS (GNU/Linux 4.15.0-23-generic x86\_64)
 # bash ./patch.sh -h
 
 SYNOPSIS
-       patch.sh [OPTION]...
+       patch.sh [-s] [-r|-h|-c VERSION|-l]
 
 DESCRIPTION
-       The patch for Nvidia drivers to increase encoder sessions
+       The patch for Nvidia drivers to remove NVENC session limit
 
-       -s    Silent mode (No output)
-       -r    Rollback to original (Restore lib from backup)
-       -h    Print this help message
+       -s             Silent mode (No output)
+       -r             Rollback to original (Restore lib from backup)
+       -h             Print this help message
+       -c VERSION     Check if version VERSION supported by this patch.
+                      Returns true exit code (0) if version is supported.
+       -l             List supported driver versions
 
 ```
 
 ## Step-by-Step guide
 
-Examples are provided for driver version 410.78. All commands are runned as root.
+Examples are provided for driver version 430.50. All commands executed as root.
 
 ### Download driver
 
-[https://download.nvidia.com/XFree86/Linux-x86\_64/410.78/NVIDIA-Linux-x86\_64-410.78.run](https://download.nvidia.com/XFree86/Linux-x86_64/410.78/NVIDIA-Linux-x86_64-410.78.run)
+[https://international.download.nvidia.com/XFree86/Linux-x86\_64/430.50/NVIDIA-Linux-x86\_64-430.50.run](https://international.download.nvidia.com/XFree86/Linux-x86_64/430.50/NVIDIA-Linux-x86_64-430.50.run)
 
 ### Install driver
 
+Make sure you have kernel headers and compiler installed before running Nvidia driver installer. Kernel headers and compiler are required to build nvidia kernel module. Recommended way to do this is to install `dkms` package, if it is available in your distro. This way `dkms` package will pull all required dependencies to allow building kernel modules and kernel module builds will be automated in a reliable fashion.
+
 ```bash
 mkdir /opt/nvidia && cd /opt/nvidia
-wget https://download.nvidia.com/XFree86/Linux-x86_64/410.78/NVIDIA-Linux-x86_64-410.78.run
-chmod +x ./NVIDIA-Linux-x86_64-410.78.run
-./NVIDIA-Linux-x86_64-410.78.run
+wget https://international.download.nvidia.com/XFree86/Linux-x86_64/430.50/NVIDIA-Linux-x86_64-430.50.run
+chmod +x ./NVIDIA-Linux-x86_64-430.50.run
+./NVIDIA-Linux-x86_64-430.50.run
 ```
 
 ### Check driver
